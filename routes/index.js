@@ -3,8 +3,10 @@ var nodemailer = require('nodemailer');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function() {
+router.post('/', function(req, res) {
   'use strict';
+
+  var mailOptions = req.body;
 
   var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -14,18 +16,13 @@ router.get('/', function() {
     }
   });
 
-  var mailOptions = {
-    from: 'nilspontusnilsson@gmail.com',
-    to: 'nilspontusnilsson@gmail.com',
-    subject: 'hello',
-    text: 'hello world!'
-  };
-
   transporter.sendMail(mailOptions, function(error, info){
       if(error){
           return console.log(error);
       }
       console.log('Message sent: ' + info.response);
+      res.status(200).send('All good!');
+
   });
 });
 
