@@ -21,8 +21,7 @@ router.post('/', function(req, res) {
           return console.log(error);
       }
       console.log('Message sent: ' + info.response);
-      res.status(200).send('All good!');
-
+      res.status(200).send({ success: true });
   });
 });
 
