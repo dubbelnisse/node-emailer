@@ -1,10 +1,13 @@
-FROM node:latest
-ADD . /app
+FROM node:6.3
+
 WORKDIR /app
-RUN rm -rf node_modules
+
+RUN touch .env
+
+ADD package.json /app/package.json
 RUN npm install
-RUN npm install -g nodemon
-RUN node -v
-ENV PORT 3000
-EXPOSE 3000
-CMD ["nodemon"]
+
+ADD ./.eslintrc /app/.eslintrc
+ADD ./lib /app/lib
+
+CMD npm start
